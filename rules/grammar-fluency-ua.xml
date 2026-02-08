@@ -1208,17 +1208,6 @@
       <example>вшись кучерскої спини і козирнув . Коляска покотилася далі.</example>
     </rule>
 
-    <rule id="UA_GEC_F_POORFLOW_0054_як" name="Плавність: , як → і">
-
-      <pattern>
-      <token case_sensitive="no">,</token>
-      <token case_sensitive="no">як</token>
-      </pattern>
-      <message>Неприродний потік речення. Краще: <suggestion>і</suggestion></message>
-      <example correction="і">х подій • ком’юніті інвесторів <marker>, як</marker> у відкритому</example>
-      <example>х подій • ком’юніті інвесторів і у відкритому</example>
-    </rule>
-
     <rule id="UA_GEC_F_POORFLOW_0055_до_тих_пір" name="Плавність: до тих пір → доти">
 
       <pattern>
